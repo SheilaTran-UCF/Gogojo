@@ -15,6 +15,37 @@ import {
   ScrollView,
 } from 'react-native';
 import {styles} from './style';
+import CustomInput from '../../../ui/CustomInput';
+import CustomPicker from '../../../ui/CustomPicker';
+
+const pickerOptions = [
+  {
+    label: 'Select',
+    value: '',
+  },
+  {
+    label: 'Yes',
+    value: 'yes',
+  },
+  {
+    label: 'No',
+    value: 'no',
+  },
+];
+const pickerOptions1 = [
+  {
+    label: 'Select',
+    value: '',
+  },
+  {
+    label: 'Female',
+    value: 'Female',
+  },
+  {
+    label: 'Male',
+    value: 'Male',
+  },
+];
 
 export default function Personal({route, navigation}) {
   const {height, width} = Dimensions.get('window');
@@ -54,124 +85,85 @@ export default function Personal({route, navigation}) {
             <View style={{height: 600, width: 370}}>
               <ScrollView>
                 {/* <View> */}
-                <Text style={styles.textName}>Full Name*</Text>
-                <TextInput
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, fullname: text})}
-                  value={info.fullname}
-                  placeholder={'emter any value'}
-                  name="fullname"
-                />
-                <Text style={styles.textName}>Day of birth*</Text>
-                <TextInput
-                  style={styles.text}
-                  onChangeText={value => setInfo({...info, dob: value})}
-                  placeholder={'emter any value'}
-                  value={info.dob}
-                  keyboardType={'number-pad'}
+                {/* Truyen prop nhu the nay cho tat ca cac field */}
+                <CustomInput
+                  _value={info.fullname}
+                  _onChangeText={text => setInfo({...info, fullname: text})}
+                  title="Name *"
+                  name="name"
+                  phd="Enter name"
                 />
 
-                <Text style={styles.textName}>Sex*</Text>
-                <View style={styles.text}>
-                  <RNPickerSelect
-                    placeholder={{}}
-                    items={[
-                      {
-                        label: 'Select',
-                        value: '',
-                      },
-                      {
-                        label: 'Male',
-                        value: 'male',
-                      },
-                      {
-                        label: 'Female',
-                        value: 'female',
-                      },
-                    ]}
-                    onValueChange={value => {
-                      setInfo({
-                        ...info,
-                        sex: value,
-                      });
-                    }}
-                    style={styles.picker}
-                    value={info.sex}
-                  />
-                </View>
-                <Text style={styles.textName}>Phone Number*</Text>
-                <TextInput
-                  name="phone"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, phone: text})}
-                  value={info.phone}
+                <CustomInput
+                  _value={info.dob}
+                  _onChangeText={text => setInfo({...info, dob: text})}
+                  title="Day of birth *"
+                  name="name"
+                  phd="Enter name"
                 />
 
-                <Text style={styles.textName}>Email*</Text>
-                <TextInput
-                  name="email"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, email: text})}
-                  value={info.email}
-                />
-                <Text style={styles.textName}>Marriage ?*</Text>
+                {/**SEX */}
 
-                {/* <TextInput
-                  name="education"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, marriage: text})}
-                  value={info.marriage}
-                /> */}
+                <CustomPicker
+                  title="Sex"
+                  pickerOptions={pickerOptions1}
+                  _value={info.sex}
+                  _onValueChange={v => setInfo({...info, sex: v})}
+                />
 
-                <View style={styles.text}>
-                  <RNPickerSelect
-                    placeholder={{}}
-                    items={[
-                      {
-                        label: 'Select',
-                        value: '',
-                      },
-                      {
-                        label: 'Yes',
-                        value: 'yes',
-                      },
-                      {
-                        label: 'No',
-                        value: 'no',
-                      },
-                    ]}
-                    onValueChange={value => {
-                      setInfo({
-                        ...info,
-                        marrigage: value,
-                      });
-                    }}
-                    style={styles.picker}
-                    value={info.sex}
-                  />
-                </View>
-                <Text style={styles.textName}>Education</Text>
+                <CustomInput
+                  _value={info.phone}
+                  //   keyboardType="number-pad"
+                  _onChangeText={text => setInfo({...info, phone: text})}
+                  title="Phone Number*"
+                  name="name"
+                  phd="Enter name"
+                />
 
-                <TextInput
-                  name="marriage"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, education: text})}
-                  value={info.education}
+                <CustomInput
+                  _value={info.email}
+                  //   keyboardType="number-pad"
+                  _onChangeText={text => setInfo({...info, email: text})}
+                  title="Email*"
+                  name="name"
+                  phd="Enter name"
                 />
-                <Text style={styles.textName}>Health</Text>
-                <TextInput
-                  name="heatlth"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, health: text})}
-                  value={info.health}
+
+                {/**Marriage */}
+                <CustomPicker
+                  pickerOptions={pickerOptions}
+                  title="Marriage *"
+                  _value={info.marriage}
+                  _onValueChange={v => setInfo({...info, marriage: v})}
                 />
-                <Text style={styles.textName}>Insurace</Text>
-                <TextInput
-                  name="insurance"
-                  style={styles.text}
-                  onChangeText={text => setInfo({...info, insurance: text})}
-                  value={info.insurance}
+
+                <CustomInput
+                  _value={info.education}
+                  keyboardType="number-pad"
+                  _onChangeText={text => setInfo({...info, education: text})}
+                  title="Education*"
+                  name="name"
+                  phd="Enter name"
                 />
+
+                <CustomInput
+                  _value={info.health}
+                  keyboardType="number-pad"
+                  _onChangeText={text => setInfo({...info, health: text})}
+                  title="Health*"
+                  name="name"
+                  phd="Enter name"
+                />
+
+                <CustomInput
+                  _value={info.insurance}
+                  keyboardType="number-pad"
+                  _onChangeText={text => setInfo({...info, insurance: text})}
+                  title="Insurance*"
+                  name="name"
+                  phd="Enter name"
+                />
+
                 <TouchableOpacity
                   style={styles.touch}
                   // onPress={() => navigation.openDrawer()}>
